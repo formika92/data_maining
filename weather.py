@@ -19,14 +19,13 @@ class ParserWheatherMoscow:
         if response.status_code == 200:
             return response
         else:
-            print(f'Error {requests.get(url, headers=self.headers).status_code}')
+            print(f'Error {response.status_code}')
 
     def _get_data_daily(self):
         """
         Получаем значения за промежуток от сегодняшнего до 5-го дня включительно
         """
-        response = self._get_response()
-        data = response.json().get('daily')[:int(self.DAYS)]
+        data = self._get_response().json().get('daily')[:int(self.DAYS)]
         return data
 
     def _get_data_morn(self):
